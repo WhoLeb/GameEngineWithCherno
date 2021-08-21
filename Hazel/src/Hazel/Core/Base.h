@@ -1,5 +1,9 @@
 #pragma once
 
+#include <memory>
+
+#include "Hazel/Core/PlatformDetection.h"
+
 #ifdef HZ_PLATFORM_WINDOWS
 #ifdef HZ_BUILD_DLL
 #define HAZEL_API __declspec(dllexport)
@@ -9,3 +13,6 @@
 #else 
 #error Hazel only supports Windows!
 #endif // HZ_PLATFORM_WINDOWS
+
+
+#define BIT(x) (1 << x)
