@@ -135,4 +135,4 @@ project "Sandbox"
     filter "configurations:Dist"
         defines "HZ_DIST"
         buildoptions "/MD"
-        optimize "On"5
+        optimize "On"
