@@ -7,42 +7,41 @@
 
 namespace Hazel
 {
+    class WindowsWindow : public Window
+    {
+    public:
+        WindowsWindow(const WindowProps& props);
+        virtual ~WindowsWindow();
 
-	class WindowsWindow : public Window
-	{
-	public:
+        void OnUpdate() override;
 
-		WindowsWindow(const WindowProps& props);
-		virtual ~WindowsWindow();
+        unsigned int GetWidth() const override { return m_Data.Width; }
+        unsigned int GetHeight() const override { return m_Data.Height; }
 
-		void OnUpdate() override;
+        void SetEventCallback(const EventCallbackFn& callback) override
+        {
+            m_Data.EventCallback = callback;
+        }
 
-		unsigned int GetWidth() const override { return m_Data.Width; }
-		unsigned int GetHeight() const override { return m_Data.Height; }
+        void SetVSync(bool enabled) override;
+        bool IsVSync() const override;
 
-		void SetEventCallback(const EventCallbackFn& callback) override
-		{
-			m_Data.EventCallback = callback;
-		}
-		void SetVSync(bool enabled) override;
-		bool IsVSync() const override;
+        virtual void* GetNativeWindow() const { return m_Window; }
+    
+    private:
+        virtual void Init(const WindowProps& props);
+        virtual void Shutdown();
 
-		virtual void* GetNativeWindow() const { return m_Window; }
+    private:
+        GLFWwindow* m_Window;
 
-	private:
-		virtual void Init(const WindowProps& props);
-		virtual void Shutdown();
+        struct WindowData
+        {
+            std::string Title;
+            unsigned int Width, Height;
+            bool VSync;
 
-	private:
-		GLFWwindow* m_Window;
-		
-		struct WindowData
-		{
-			std::string Title;
-			unsigned int Width, Height;
-			bool VSync;
-
-			EventCallbackFn EventCallback;
-		} m_Data;
-	};
+            EventCallbackFn EventCallback;
+        } m_Data;
+    };
 }

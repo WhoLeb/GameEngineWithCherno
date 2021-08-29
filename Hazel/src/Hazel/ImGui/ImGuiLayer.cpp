@@ -100,6 +100,7 @@ namespace Hazel
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = true;
+
 		return false;
 	}
 
